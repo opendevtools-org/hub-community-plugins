@@ -1,0 +1,21 @@
+{
+  "updatedAt": "2026-08-07",
+  "plugins": [
+    {
+      "id": "example-notes",
+      "name": "Example Notes",
+      "description": "Plugin di esempio per il market Hub (Docker Compose + homelab-plugin.json).",
+      "version": "0.1.0",
+      "homepage": "https://github.com/opendevtools-org/hub-community-plugins",
+      "repo": "opendevtools-org/hub-community-plugins",
+      "ref": "main",
+      "visibility": "community",
+      "install": {
+        "kind": "compose",
+        "cloneUrl": "https://github.com/opendevtools-org/hub-community-plugins.git",
+        "composeFile": "examples/example-notes/docker-compose.yml",
+        "command": "git clone https://github.com/opendevtools-org/hub-community-plugins.git && cd hub-community-plugins/examples/example-notes && docker compose up -d"
+      }
+    }
+  ]
+}

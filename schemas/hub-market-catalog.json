@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/opendevtools-org/hub-community-plugins/main/schemas/hub-market-catalog.json",
+  "title": "Hub Market Catalog",
+  "type": "object",
+  "required": ["plugins"],
+  "additionalProperties": true,
+  "properties": {
+    "updatedAt": { "type": "string" },
+    "plugins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{1,62}$"
+          },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "version": { "type": "string" },
+          "homepage": { "type": "string", "format": "uri" },
+          "repo": { "type": "string", "description": "owner/name" },
+          "ref": { "type": "string" },
+          "visibility": { "type": "string", "enum": ["community", "private"] },
+          "install": {
+            "type": "object",
+            "properties": {
+              "kind": { "type": "string", "default": "compose" },
+              "cloneUrl": { "type": "string" },
+              "composeFile": { "type": "string" },
+              "command": {
+                "type": "string",
+                "description": "Comando da copiare; se assente Hub lo deriva"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
