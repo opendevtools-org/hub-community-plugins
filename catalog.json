@@ -1,20 +1,19 @@
 {
-  "updatedAt": "2026-08-07",
+  "updatedAt": "2026-08-14",
   "plugins": [
     {
-      "id": "example-notes",
-      "name": "Example Notes",
-      "description": "Plugin di esempio per il market Hub (Docker Compose + homelab-plugin.json).",
-      "version": "0.1.0",
-      "homepage": "https://github.com/opendevtools-org/hub-community-plugins",
+      "id": "vibravid",
+      "name": "VibraVid",
+      "description": "Web GUI to search and download movies, series, anime, and albums (HLS/DASH/MP4). Published image from AstraeLabs. Use only with content you have rights to.",
+      "version": "1.0.0",
+      "homepage": "https://github.com/AstraeLabs/VibraVid",
       "repo": "opendevtools-org/hub-community-plugins",
       "ref": "main",
       "visibility": "community",
       "install": {
         "kind": "compose",
-        "cloneUrl": "https://github.com/opendevtools-org/hub-community-plugins.git",
-        "composeFile": "examples/example-notes/docker-compose.yml",
-        "command": "git clone https://github.com/opendevtools-org/hub-community-plugins.git && cd hub-community-plugins/examples/example-notes && docker compose up -d"
+        "composeFile": "plugins/vibravid/docker-compose.yml",
+        "command": "mkdir -p plugins/vibravid && curl -fsSL https://raw.githubusercontent.com/opendevtools-org/hub-community-plugins/main/plugins/vibravid/docker-compose.yml -o plugins/vibravid/docker-compose.yml && if ! grep -Fq 'plugins/vibravid/docker-compose.yml' docker-compose.apps.yml 2>/dev/null; then printf '\\ninclude:\\n  - path: plugins/vibravid/docker-compose.yml\\n    project_directory: .\\n' >> docker-compose.apps.yml; fi && if [ -f upstream/docker-compose.yml ]; then docker compose --project-directory . -f upstream/docker-compose.yml -f upstream/docker-compose.lan.yml -f docker-compose.apps.yml up -d; else docker compose -f docker-compose.yml -f docker-compose.lan.yml -f docker-compose.apps.yml up -d; fi"
       }
     }
   ]

@@ -1,0 +1,35 @@
+# VibraVid GUI for Home Lab Hub (community plugin).
+# Upstream: https://github.com/AstraeLabs/VibraVid (GPL-3.0)
+# Image: ghcr.io/astraelabs/vibravid — no local build.
+#
+# Included from docker-compose.apps.yml with project_directory: . so
+# bind mounts resolve against the homelab-deploy folder (./data/...).
+
+services:
+  vibravid:
+    image: ghcr.io/astraelabs/vibravid:${VIBRAVID_TAG:-latest}
+    pull_policy: always
+    container_name: homelab-vibravid
+    restart: unless-stopped
+    ports:
+      - "${VIBRAVID_PORT:-3100}:8000"
+    volumes:
+      - ${VIBRAVID_DB_DIR:-./data/vibravid/db}:/app/data
+      - ${VIBRAVID_VIDEO_DIR:-./data/vibravid/video}:/app/Video
+      - ${VIBRAVID_LOGS_DIR:-./data/vibravid/logs}:/app/.cache/logs
+      - ${VIBRAVID_CONFIG_DIR:-./data/vibravid/config}:/app/Conf
+      - ${VIBRAVID_BINARY_DIR:-./data/vibravid/binary}:/home/appuser/.local/bin/binary
+    environment:
+      DJANGO_DEBUG: "false"
+      DJANGO_DB_DIR: "/app/data"
+      DJANGO_SECRET_KEY: ${VIBRAVID_SECRET_KEY:-change-me-set-VIBRAVID_SECRET_KEY-in-env}
+      PYTHONUNBUFFERED: "1"
+      ALLOWED_HOSTS: ${VIBRAVID_ALLOWED_HOSTS:-localhost,127.0.0.1,vibravid,homelab-vibravid}
+      CSRF_TRUSTED_ORIGINS: ${VIBRAVID_CSRF_TRUSTED_ORIGINS:-http://localhost:3100,http://127.0.0.1:3100}
+      TMDB_API_KEY: ${TMDB_API_KEY:-}
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/"]
+      interval: 30s
+      timeout: 8s
+      retries: 5
+      start_period: 60s

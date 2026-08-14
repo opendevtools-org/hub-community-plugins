@@ -30,10 +30,13 @@
             "properties": {
               "kind": { "type": "string", "default": "compose" },
               "cloneUrl": { "type": "string" },
-              "composeFile": { "type": "string" },
+              "composeFile": {
+                "type": "string",
+                "description": "Path in this repo, typically plugins/<id>/docker-compose.yml"
+              },
               "command": {
                 "type": "string",
-                "description": "Comando da copiare; se assente Hub lo deriva"
+                "description": "Copied by Hub Market: download compose into plugins/<id>/ and include it from docker-compose.apps.yml. If omitted, Hub derives it from composeFile."
               }
             }
           }
