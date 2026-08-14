@@ -1,0 +1,19 @@
+# VibraVid web client — run on a device, not on the API server.
+# Set VIBRAVID_API_UPSTREAM to the backend (example: http://192.168.1.10:3100).
+# Add this client's origin to VIBRAVID_ALLOWED_HOSTS and VIBRAVID_CSRF_TRUSTED_ORIGINS on the server.
+
+services:
+  vibravid-web:
+    image: nginx:1.27-alpine
+    container_name: homelab-vibravid-web
+    restart: unless-stopped
+    ports:
+      - "${VIBRAVID_CLIENT_PORT:-3180}:80"
+    environment:
+      VIBRAVID_API_UPSTREAM: ${VIBRAVID_API_UPSTREAM:-http://host.docker.internal:3100}
+      NGINX_ENVSUBST_FILTER: ^VIBRAVID_API_UPSTREAM$
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./clients/web/nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
+      - ./clients/web:/usr/share/nginx/html:ro

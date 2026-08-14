@@ -8,26 +8,29 @@ Default Hub URL:
 https://raw.githubusercontent.com/opendevtools-org/hub-community-plugins/main/catalog.json
 ```
 
-Hub lists public plugins from `catalog.json`. Each plugin’s Compose file lives under [`plugins/<id>/`](plugins/).
+Hub lists public plugins from `catalog.json`. Each plugin’s **backend** Compose file lives under [`plugins/<id>/`](plugins/). Web clients live under `plugins/<id>/clients/` plus `docker-compose.frontend.yml`.
 
 ## Layout
 
 ```
-catalog.json                 # market index (id, name, install.command, …)
-plugins/<id>/docker-compose.yml
-plugins/<id>/homelab-plugin.json   # optional
-schemas/                     # catalog JSON Schema
+catalog.json
+plugins/<id>/docker-compose.backend.yml    # server API (required)
+plugins/<id>/docker-compose.frontend.yml   # device web client
+plugins/<id>/clients/web/                  # static files + nginx template
+plugins/<id>/homelab-plugin.json           # optional
+schemas/
 ```
 
-## Install command
+`docker-compose.yml` may exist as an alias that includes the backend file.
 
-`install.command` is what Hub Market copies. For a community plugin it must:
+## Backend vs client
 
-1. Download `plugins/<id>/docker-compose.yml` into the homelab-deploy folder
-2. Add an `include` of that file on `docker-compose.apps.yml` (`project_directory: .`)
-3. Recreate the stack with the apps overlay
+| Where | File | Role |
+|-------|------|------|
+| Server | `docker-compose.backend.yml` | API / workers. Market **Install** copies this into `docker-compose.apps.yml`. |
+| Device | `docker-compose.frontend.yml` | Web client. Reverse-proxies to `*_API_UPSTREAM`. Not started on the server. |
 
-If `install.command` is omitted and `install.composeFile` is `plugins/<id>/docker-compose.yml`, Hub derives that command.
+If `install.command` is omitted and `install.composeFile` is `plugins/<id>/docker-compose.backend.yml`, Hub derives the backend command. If a client has `composeFile`, Hub derives the device command (standalone `docker compose -f … up`, not the apps overlay).
 
 Private plugins do not belong here (use Hub `market-private.json` on the site).
 

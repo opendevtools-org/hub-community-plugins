@@ -32,11 +32,27 @@
               "cloneUrl": { "type": "string" },
               "composeFile": {
                 "type": "string",
-                "description": "Path in this repo, typically plugins/<id>/docker-compose.yml"
+                "description": "Path in this repo, typically plugins/<id>/docker-compose.backend.yml"
               },
+              "role": { "type": "string", "default": "backend" },
               "command": {
                 "type": "string",
-                "description": "Copied by Hub Market: download compose into plugins/<id>/ and include it from docker-compose.apps.yml. If omitted, Hub derives it from composeFile."
+                "description": "Copied by Hub Market: download backend compose into plugins/<id>/ and include it from docker-compose.apps.yml. If omitted, Hub derives it from composeFile."
+              }
+            }
+          },
+          "clients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": { "type": "string" },
+                "launchPath": { "type": "string" },
+                "composeFile": {
+                  "type": "string",
+                  "description": "plugins/<id>/docker-compose.frontend.yml"
+                },
+                "command": { "type": "string" }
               }
             }
           }

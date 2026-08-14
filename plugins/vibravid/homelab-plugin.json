@@ -1,18 +1,24 @@
 {
   "id": "vibravid",
   "name": "VibraVid",
-  "version": "1.0.0",
-  "description": "Web GUI to search and download movies, series, anime, and albums (HLS/DASH/MP4). Upstream image from AstraeLabs; run only on content you have rights to.",
+  "version": "1.1.0",
+  "description": "Search and download movies, series, anime, and albums (HLS/DASH/MP4). Backend on the server; web client on devices. Upstream image from AstraeLabs; run only on content you have rights to.",
   "homepage": "https://github.com/AstraeLabs/VibraVid",
   "launchPath": "/",
   "healthcheck": "/",
   "apiPrefix": "/api",
   "ports": { "http": 3100 },
   "compose": {
-    "file": "docker-compose.yml",
+    "file": "docker-compose.backend.yml",
     "service": "vibravid",
-    "image": "ghcr.io/astraelabs/vibravid:latest"
+    "image": "ghcr.io/astraelabs/vibravid:latest",
+    "containerPort": 8000
   },
-  "clients": [{ "kind": "web", "launchPath": "/" }],
+  "clients": [
+    {
+      "kind": "web",
+      "launchPath": "/"
+    }
+  ],
   "minPlatformVersion": "0.1.0"
 }

@@ -1,21 +1,25 @@
 # Community plugins
 
 Each folder is one Home Lab Hub market plugin. Hub reads the index
-[`catalog.json`](../catalog.json); `install.composeFile` points here.
+[`catalog.json`](../catalog.json).
 
 ```
 plugins/<id>/
-  docker-compose.yml    # required — prebuilt image, no host build
-  homelab-plugin.json   # optional — Hub agent manifest
-  .env.example          # optional — vars to merge into the site `.env`
+  docker-compose.backend.yml     # required — server API, prebuilt image
+  docker-compose.frontend.yml    # web client for devices
+  clients/web/                   # nginx template + launcher page
+  homelab-plugin.json            # optional
+  .env.example                   # vars to merge into the site `.env`
 ```
 
-## Install (homelab-deploy)
+## Backend (server)
 
-The catalog `install.command` (copied from Hub Market):
+Market **Install** downloads `docker-compose.backend.yml` and includes it from
+`docker-compose.apps.yml`.
 
-1. Downloads `plugins/<id>/docker-compose.yml` into the site folder.
-2. Appends an `include` entry to `docker-compose.apps.yml`.
-3. Runs the usual three-file Compose (`docker-compose.yml` + lan/local + apps).
+## Web client (device)
+
+Market **Client** downloads `docker-compose.frontend.yml` plus `clients/web/`
+and runs that compose on the device, with `*_API_UPSTREAM` pointing at the server.
 
 Do not put secrets in this repo. Site owners set them in their `.env`.
