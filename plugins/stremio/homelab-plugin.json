@@ -1,0 +1,23 @@
+{
+  "id": "stremio",
+  "name": "Stremio",
+  "version": "1.3.8",
+  "description": "Stremio Web plus streaming server in one container. Discover and play movies and series through addons. Use only with content you have rights to.",
+  "homepage": "https://www.stremio.com/",
+  "launchPath": "/",
+  "healthcheck": "/",
+  "apiPrefix": "/",
+  "compose": {
+    "file": "docker-compose.backend.yml",
+    "service": "stremio",
+    "image": "tsaridas/stremio-docker:latest",
+    "containerPort": 8080
+  },
+  "clients": [
+    {
+      "kind": "web",
+      "launchPath": "/"
+    }
+  ],
+  "minPlatformVersion": "0.1.0"
+}

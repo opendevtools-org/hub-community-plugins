@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14",
+  "updatedAt": "2026-08-15",
   "plugins": [
     {
       "id": "vibravid",
@@ -14,6 +14,27 @@
         "kind": "compose",
         "role": "backend",
         "composeFile": "plugins/vibravid/docker-compose.backend.yml"
+      },
+      "clients": [
+        {
+          "kind": "web",
+          "launchPath": "/"
+        }
+      ]
+    },
+    {
+      "id": "stremio",
+      "name": "Stremio",
+      "description": "Stremio Web plus streaming server in one container. Discover and play movies and series through addons. Published image from tsaridas/stremio-docker. Use only with content you have rights to.",
+      "version": "1.3.8",
+      "homepage": "https://www.stremio.com/",
+      "repo": "opendevtools-org/hub-community-plugins",
+      "ref": "main",
+      "visibility": "community",
+      "install": {
+        "kind": "compose",
+        "role": "backend",
+        "composeFile": "plugins/stremio/docker-compose.backend.yml"
       },
       "clients": [
         {
