@@ -42,6 +42,27 @@
           "launchPath": "/"
         }
       ]
+    },
+    {
+      "id": "webssh",
+      "name": "WebSSH",
+      "description": "Browser SSH client (password, key, TOTP). Connect to hosts on the Hub server network. Published image from austozi/webssh (huashengdun/webssh).",
+      "version": "1.6.3",
+      "homepage": "https://github.com/huashengdun/webssh",
+      "repo": "opendevtools-org/hub-community-plugins",
+      "ref": "main",
+      "visibility": "community",
+      "install": {
+        "kind": "compose",
+        "role": "backend",
+        "composeFile": "plugins/webssh/docker-compose.backend.yml"
+      },
+      "clients": [
+        {
+          "kind": "web",
+          "launchPath": "/"
+        }
+      ]
     }
   ]
 }

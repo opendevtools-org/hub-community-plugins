@@ -1,0 +1,23 @@
+{
+  "id": "webssh",
+  "name": "WebSSH",
+  "version": "1.6.3",
+  "description": "Browser SSH client (password, key, TOTP). Connect to hosts on the Hub server network. Upstream huashengdun/webssh.",
+  "homepage": "https://github.com/huashengdun/webssh",
+  "launchPath": "/",
+  "healthcheck": "/",
+  "apiPrefix": "/",
+  "compose": {
+    "file": "docker-compose.backend.yml",
+    "service": "webssh",
+    "image": "austozi/webssh:latest",
+    "containerPort": 8888
+  },
+  "clients": [
+    {
+      "kind": "web",
+      "launchPath": "/"
+    }
+  ],
+  "minPlatformVersion": "0.1.0"
+}

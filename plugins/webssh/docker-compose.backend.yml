@@ -1,0 +1,28 @@
+# WebSSH for Home Lab Hub (community plugin).
+# Upstream: https://github.com/huashengdun/webssh (MIT)
+# Image: austozi/webssh — prebuilt, linux/amd64 + linux/arm64, no local build.
+
+services:
+  webssh:
+    image: austozi/webssh:${WEBSSH_TAG:-latest}
+    pull_policy: always
+    container_name: homelab-webssh
+    restart: unless-stopped
+    ports:
+      - "${WEBSSH_PORT:-8888}:8888"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command:
+      - python
+      - run.py
+      - --address=0.0.0.0
+      - --port=8888
+      - --origin=*
+      - --xsrf=False
+      - --fbidhttp=False
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8888/ >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 8s
+      retries: 5
+      start_period: 20s

@@ -1,0 +1,3 @@
+# Backward compatible alias: backend only (bundled web client).
+include:
+  - path: docker-compose.backend.yml
