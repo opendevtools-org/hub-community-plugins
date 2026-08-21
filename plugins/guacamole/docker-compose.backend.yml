@@ -1,0 +1,28 @@
+# Apache Guacamole for Home Lab Hub (community plugin).
+# Upstream: https://guacamole.apache.org/
+# Image: flcontainers/guacamole — web UI + guacd + PostgreSQL in one container.
+# Prebuilt linux/amd64 + linux/arm64. No local build.
+# Default login: guacadmin / guacadmin (change immediately).
+
+services:
+  guacamole:
+    image: flcontainers/guacamole:${GUACAMOLE_TAG:-latest}
+    pull_policy: always
+    container_name: homelab-guacamole
+    restart: unless-stopped
+    ports:
+      - "${GUACAMOLE_PORT:-8080}:8080"
+    volumes:
+      - ${GUACAMOLE_DATA_DIR:-./data/guacamole}:/config
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      TZ: ${TZ:-UTC}
+      # Optional: comma-separated Guacamole extensions (no spaces), e.g. auth-totp
+      # EXTENSIONS: ${GUACAMOLE_EXTENSIONS:-}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8080/ >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 8s
+      retries: 8
+      start_period: 90s

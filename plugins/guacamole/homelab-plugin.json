@@ -1,0 +1,23 @@
+{
+  "id": "guacamole",
+  "name": "Apache Guacamole",
+  "version": "1.6.0",
+  "description": "Clientless remote desktop gateway (RDP, VNC, SSH) in the browser. Published image from flcontainers/guacamole.",
+  "homepage": "https://guacamole.apache.org/",
+  "launchPath": "/",
+  "healthcheck": "/",
+  "apiPrefix": "/",
+  "compose": {
+    "file": "docker-compose.backend.yml",
+    "service": "guacamole",
+    "image": "flcontainers/guacamole:latest",
+    "containerPort": 8080
+  },
+  "clients": [
+    {
+      "kind": "web",
+      "launchPath": "/"
+    }
+  ],
+  "minPlatformVersion": "0.1.0"
+}

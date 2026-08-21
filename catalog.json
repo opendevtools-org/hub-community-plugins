@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15",
+  "updatedAt": "2026-08-21",
   "plugins": [
     {
       "id": "vibravid",
@@ -56,6 +56,27 @@
         "kind": "compose",
         "role": "backend",
         "composeFile": "plugins/webssh/docker-compose.backend.yml"
+      },
+      "clients": [
+        {
+          "kind": "web",
+          "launchPath": "/"
+        }
+      ]
+    },
+    {
+      "id": "guacamole",
+      "name": "Apache Guacamole",
+      "description": "Clientless remote desktop gateway (RDP, VNC, SSH) in the browser. Published image from flcontainers/guacamole (Apache Guacamole web + guacd + PostgreSQL). Default login guacadmin / guacadmin — change it immediately.",
+      "version": "1.6.0",
+      "homepage": "https://guacamole.apache.org/",
+      "repo": "opendevtools-org/hub-community-plugins",
+      "ref": "main",
+      "visibility": "community",
+      "install": {
+        "kind": "compose",
+        "role": "backend",
+        "composeFile": "plugins/guacamole/docker-compose.backend.yml"
       },
       "clients": [
         {
