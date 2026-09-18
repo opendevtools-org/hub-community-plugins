@@ -1,69 +1,6 @@
 {
-  "updatedAt": "2026-08-21",
+  "updatedAt": "2026-09-18",
   "plugins": [
-    {
-      "id": "vibravid",
-      "name": "VibraVid",
-      "description": "Backend on the server; web client on devices. Search and download movies, series, anime, and albums (HLS/DASH/MP4). Published image from AstraeLabs. Use only with content you have rights to.",
-      "version": "1.1.0",
-      "homepage": "https://github.com/AstraeLabs/VibraVid",
-      "repo": "opendevtools-org/hub-community-plugins",
-      "ref": "main",
-      "visibility": "community",
-      "install": {
-        "kind": "compose",
-        "role": "backend",
-        "composeFile": "plugins/vibravid/docker-compose.backend.yml"
-      },
-      "clients": [
-        {
-          "kind": "web",
-          "launchPath": "/"
-        }
-      ]
-    },
-    {
-      "id": "stremio",
-      "name": "Stremio",
-      "description": "Stremio Web plus streaming server in one container. Discover and play movies and series through addons. Published image from tsaridas/stremio-docker. Use only with content you have rights to.",
-      "version": "1.3.8",
-      "homepage": "https://www.stremio.com/",
-      "repo": "opendevtools-org/hub-community-plugins",
-      "ref": "main",
-      "visibility": "community",
-      "install": {
-        "kind": "compose",
-        "role": "backend",
-        "composeFile": "plugins/stremio/docker-compose.backend.yml"
-      },
-      "clients": [
-        {
-          "kind": "web",
-          "launchPath": "/"
-        }
-      ]
-    },
-    {
-      "id": "webssh",
-      "name": "WebSSH",
-      "description": "Browser SSH client (password, key, TOTP). Connect to hosts on the Hub server network. Published image from austozi/webssh (huashengdun/webssh).",
-      "version": "1.6.3",
-      "homepage": "https://github.com/huashengdun/webssh",
-      "repo": "opendevtools-org/hub-community-plugins",
-      "ref": "main",
-      "visibility": "community",
-      "install": {
-        "kind": "compose",
-        "role": "backend",
-        "composeFile": "plugins/webssh/docker-compose.backend.yml"
-      },
-      "clients": [
-        {
-          "kind": "web",
-          "launchPath": "/"
-        }
-      ]
-    },
     {
       "id": "guacamole",
       "name": "Apache Guacamole",
@@ -73,6 +10,7 @@
       "repo": "opendevtools-org/hub-community-plugins",
       "ref": "main",
       "visibility": "community",
+      "uninstallable": false,
       "install": {
         "kind": "compose",
         "role": "backend",
