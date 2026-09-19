@@ -17,6 +17,10 @@ username, so use a Hub **admin** to manage users and shares.
 
 To reach the Hub host from a connection, use hostname `host.docker.internal`.
 
+PostgreSQL data is a Docker named volume (`guacamole-config` → `/config`). Do
+not bind-mount a host folder there: on Docker Desktop for Windows that often
+leaves logs stuck on `Guacamole client waiting for DB`.
+
 ## Install
 
 From Hub Market (`/market`), while logged in, click **Installa**.

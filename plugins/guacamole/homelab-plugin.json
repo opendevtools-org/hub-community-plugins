@@ -1,7 +1,7 @@
 {
   "id": "guacamole",
   "name": "Apache Guacamole",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Clientless remote desktop gateway (RDP, VNC, SSH) in the browser. Published image from flcontainers/guacamole.",
   "homepage": "https://guacamole.apache.org/",
   "launchPath": "/",

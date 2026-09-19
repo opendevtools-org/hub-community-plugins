@@ -5,7 +5,7 @@
       "id": "guacamole",
       "name": "Apache Guacamole",
       "description": "Clientless remote desktop gateway (RDP, VNC, SSH) in the browser. Published image from flcontainers/guacamole (Apache Guacamole web + guacd + PostgreSQL). Default login guacadmin / guacadmin — change it immediately.",
-      "version": "1.6.0",
+      "version": "1.6.1",
       "homepage": "https://guacamole.apache.org/",
       "repo": "opendevtools-org/hub-community-plugins",
       "ref": "main",

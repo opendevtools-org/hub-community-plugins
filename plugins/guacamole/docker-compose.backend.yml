@@ -1,8 +1,12 @@
-# Apache Guacamole for Home Lab Hub (community plugin).
+# Apache Guacamole for Hub (community plugin).
 # Upstream: https://guacamole.apache.org/
 # Image: flcontainers/guacamole — web UI + guacd + PostgreSQL in one container.
 # Prebuilt linux/amd64 + linux/arm64. No local build.
 # Default login: guacadmin / guacadmin (change immediately).
+#
+# PostgreSQL lives under /config. Use a Docker named volume (not a host bind
+# mount): bind mounts on Docker Desktop for Windows often leave the client
+# stuck on "Guacamole client waiting for DB".
 
 services:
   guacamole:
@@ -13,9 +17,10 @@ services:
     ports:
       - "${GUACAMOLE_PORT:-8080}:8080"
     volumes:
-      - ${GUACAMOLE_DATA_DIR:-./data/guacamole}:/config
+      - guacamole-config:/config
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      - "localhost:127.0.0.1"
     environment:
       TZ: ${TZ:-UTC}
       # Optional: comma-separated Guacamole extensions (no spaces), e.g. auth-totp
@@ -26,3 +31,7 @@ services:
       timeout: 8s
       retries: 8
       start_period: 90s
+
+volumes:
+  guacamole-config:
+    driver: local
